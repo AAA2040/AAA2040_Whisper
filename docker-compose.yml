@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  whisper-app:
+    build: .
+    container_name: whisper-app
+    ports:
+      - "8080:8000"
+    volumes:
+      - ./repository:/app/repository
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    networks:
+      - mynet
+
+networks:
+  mynet:
+    external: true 

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개발자 페이지</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+        input[type="file"] {
+            display: block;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        .success {
+            color: green;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>개발자 페이지</h1>
+        
+        <div class="section">
+            <h2>Firebase Admin SDK 키 업로드</h2>
+            <form action="/upload_firebase_key" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="firebase_key">Firebase Admin SDK 키 파일 (JSON)</label>
+                    <input type="file" id="firebase_key" name="firebase_key" accept=".json">
+                </div>
+                <button type="submit">업로드</button>
+            </form>
+            {% if upload_message %}
+            <p class="{% if upload_error %}error{% else %}success{% endif %}">
+                {{ upload_message }}
+            </p>
+            {% endif %}
+        </div>
+
+        <div class="section">
+            <h2>현재 Firebase Admin SDK 키 내용</h2>
+            {% if firebase_key_content %}
+            <pre>{{ firebase_key_content }}</pre>
+            {% else %}
+            <p>Firebase Admin SDK 키 파일이 없거나 읽을 수 없습니다.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html> 
